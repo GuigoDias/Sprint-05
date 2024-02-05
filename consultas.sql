@@ -29,3 +29,13 @@ INNER JOIN produto ON categoria.id = produto.categoria_id
 INNER JOIN item_pedido ON item_pedido.produto_id = produto.id
 GROUP BY categoria.nome
 ORDER BY sum(item_pedido.preco_unitario * item_pedido.quantidade) DESC;
+
+-- 6) Relatório analítico de pedidos
+
+SELECT 
+	count(item_pedido.id) AS pedidos_realizados,
+    sum(item_pedido.quantidade) AS produtos_vendidos,
+    min(item_pedido.preco_unitario) AS pedido_mais_barato,
+    max(item_pedido.preco_unitario) AS pedido_mais_caro,
+    sum(item_pedido.preco_unitario * item_pedido.quantidade) AS montante_vendido
+FROM item_pedido;
